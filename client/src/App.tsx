@@ -29,7 +29,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
         
-        <div className="sticky bottom-20 left-0 right-0 z-50 px-4 mb-4">
+        <div className="fixed bottom-20 left-0 right-0 z-50 px-4">
           <CarPlayButton 
             onClick={() => {
               toast({
