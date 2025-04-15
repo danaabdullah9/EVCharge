@@ -10,7 +10,7 @@ import useUserLocation from "@/hooks/useUserLocation";
 import useStations from "@/hooks/useStations";
 import StationMarker from "@/components/StationMarker";
 import BottomSheet from "@/components/BottomSheet";
-import AddStationModal from "@/components/AddStationModal";
+import AddStationPopup from "@/components/AddStationPopup";
 import ReportStationModal from "@/components/ReportStationModal";
 import NavigationHelper from "@/components/NavigationHelper";
 import StatusIndicator from "@/components/StatusIndicator";
@@ -295,8 +295,8 @@ export default function MapView() {
         </div>
       )}
 
-      {/* Add Station Modal */}
-      <AddStationModal 
+      {/* Add Station Popup */}
+      <AddStationPopup 
         isVisible={addStationModalVisible}
         onClose={() => setAddStationModalVisible(false)}
         userLocation={userLocation}
