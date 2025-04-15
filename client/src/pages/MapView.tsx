@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -8,7 +9,7 @@ import { useUserLocation } from "@/hooks/useUserLocation";
 import { cn } from "@/lib/utils";
 import { MdRefresh, MdFilterList } from "react-icons/md";
 
-export default function MapView() {
+function MapView() {
   const { stations, isLoading } = useStations();
   const { location, error: locationError, getLocation } = useUserLocation();
   const [showFilters, setShowFilters] = useState(false);
