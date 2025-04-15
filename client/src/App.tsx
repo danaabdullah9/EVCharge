@@ -10,11 +10,24 @@ import BottomNavigation from "@/components/BottomNavigation";
 import CarPlayButton from "@/components/CarPlayButton";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import AddStationModal from "@/components/AddStationModal";
+import StatusIndicator from "@/components/StatusIndicator";
+import useUserLocation from "@/hooks/useUserLocation";
 
 function App() {
   const [activeTab, setActiveTab] = useState("map");
   const [location] = useLocation();
   const { toast } = useToast();
+  const { location: userLocation } = useUserLocation();
+  const [addStationModalVisible, setAddStationModalVisible] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [activeStatusFilter, setActiveStatusFilter] = useState<string | null>(null);
+
+  // Handle adding a new station
+  const handleAddStation = () => {
+    setAddStationModalVisible(true);
+  };
 
   return (
     <div className="app-container h-screen flex flex-col">

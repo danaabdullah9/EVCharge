@@ -257,24 +257,7 @@ export default function MapView() {
           </div>
         )}
 
-        {/* Add Station Button */}
-        <Button 
-          className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 absolute left-4 bottom-24 shadow-lg w-12 h-12"
-          onClick={handleAddStation}
-        >
-          <i className="fas fa-plus text-xl"></i>
-        </Button>
 
-        {/* Filter Button */}
-        <div className="absolute left-4 bottom-40 flex flex-col gap-2">
-          <Button 
-            variant="outline"
-            className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg border border-gray-200 w-12 h-12"
-            onClick={() => setFiltersVisible(!filtersVisible)}
-          >
-            <i className="fas fa-sliders text-gray-800"></i>
-          </Button>
-        </div>
       </div>
 
       {/* Bottom Sheet */}
