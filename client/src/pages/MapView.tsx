@@ -53,34 +53,34 @@ const MapController = ({ userLocation, onLocationUpdate }: { userLocation: [numb
 
   return (
     <div className="absolute top-4 right-4 flex flex-col gap-2 z-[400]">
-      <Button 
-        variant="secondary" 
+      <Button
+        variant="secondary"
         size="icon"
-        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10" 
+        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10"
         onClick={centerOnUser}
       >
         <i className="fas fa-location-crosshairs text-blue-600"></i>
       </Button>
-      <Button 
-        variant="secondary" 
+      <Button
+        variant="secondary"
         size="icon"
-        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10" 
+        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10"
         onClick={() => map.zoomIn()}
       >
         <i className="fas fa-plus text-gray-800"></i>
       </Button>
-      <Button 
-        variant="secondary" 
+      <Button
+        variant="secondary"
         size="icon"
-        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10" 
+        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10"
         onClick={() => map.zoomOut()}
       >
         <i className="fas fa-minus text-gray-800"></i>
       </Button>
-      <Button 
-        variant="secondary" 
+      <Button
+        variant="secondary"
         size="icon"
-        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10" 
+        className="bg-white rounded-full shadow-md hover:bg-gray-50 w-10 h-10"
         onClick={() => queryClient.invalidateQueries({ queryKey: ['/api/stations'] })}
       >
         <i className="fas fa-rotate text-gray-800"></i>
@@ -92,8 +92,8 @@ const MapController = ({ userLocation, onLocationUpdate }: { userLocation: [numb
 // UserLocationMarker component
 const UserLocationMarker = ({ position }: { position: [number, number] }) => {
   return (
-    <Marker 
-      position={position} 
+    <Marker
+      position={position}
       icon={new Icon({
         iconUrl: 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233B82F6" width="36" height="36"><circle cx="12" cy="12" r="10" fill="%233B82F6" stroke="white" stroke-width="2"/></svg>',
         iconSize: [24, 24],
@@ -179,9 +179,9 @@ export default function MapView() {
   // Handle favoriting a station
   const handleToggleFavorite = () => {
     if (selectedStation) {
-      toggleFavoriteMutation.mutate({ 
-        stationId: selectedStation.id, 
-        isFavorite: selectedStation.isFavorite 
+      toggleFavoriteMutation.mutate({
+        stationId: selectedStation.id,
+        isFavorite: selectedStation.isFavorite
       });
     }
   };
@@ -223,9 +223,9 @@ export default function MapView() {
     <main className="flex-1 relative overflow-hidden h-full">
       <div className="absolute inset-0">
         {userLocation ? (
-          <MapContainer 
-            center={defaultPosition} 
-            zoom={13} 
+          <MapContainer
+            center={defaultPosition}
+            zoom={13}
             style={{ height: "100%", width: "100%" }}
             zoomControl={false}
           >
@@ -239,7 +239,7 @@ export default function MapView() {
             )}
 
             {stations.map((station) => (
-              <StationMarker 
+              <StationMarker
                 key={station.id}
                 station={station}
                 onSelect={() => handleStationSelect(station)}
@@ -258,7 +258,7 @@ export default function MapView() {
         )}
 
         {/* Add Station Button */}
-        <Button 
+        <Button
           className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 absolute left-4 bottom-24 shadow-lg w-12 h-12"
           onClick={handleAddStation}
         >
@@ -267,7 +267,7 @@ export default function MapView() {
 
         {/* Filter Button */}
         <div className="absolute left-4 bottom-40 flex flex-col gap-2">
-          <Button 
+          <Button
             variant="outline"
             className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg border border-gray-200 w-12 h-12"
             onClick={() => setFiltersVisible(!filtersVisible)}
@@ -275,12 +275,28 @@ export default function MapView() {
             <i className="fas fa-sliders text-gray-800"></i>
           </Button>
         </div>
+
+
+        {/* CarPlay Button - Integrated from edited code */}
+        <div className="sticky bottom-20 left-0 right-0 z-50 px-4 mb-4">
+          <CarPlayButton
+            onClick={() => {
+              toast({
+                title: "Car screen integration",
+                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                duration: 3000,
+              });
+            }}
+            className="animate-bounce-slow"
+          />
+        </div>
+
       </div>
 
       {/* Bottom Sheet */}
       {selectedStation && (
-        <BottomSheet 
-          station={selectedStation} 
+        <BottomSheet
+          station={selectedStation}
           isExpanded={bottomSheetExpanded}
           onToggleExpand={() => setBottomSheetExpanded(!bottomSheetExpanded)}
           onToggleFavorite={handleToggleFavorite}
@@ -291,7 +307,7 @@ export default function MapView() {
       )}
 
       {/* Add Station Modal */}
-      <AddStationModal 
+      <AddStationModal
         isVisible={addStationModalVisible}
         onClose={() => setAddStationModalVisible(false)}
         userLocation={userLocation}
@@ -299,7 +315,7 @@ export default function MapView() {
 
       {/* Report Station Modal */}
       {selectedStation && (
-        <ReportStationModal 
+        <ReportStationModal
           isVisible={reportModalVisible}
           station={selectedStation}
           onClose={() => setReportModalVisible(false)}
@@ -323,7 +339,7 @@ export default function MapView() {
           <div className="flex flex-col gap-2">
             <h3 className="font-semibold text-sm">Filter by Status</h3>
             <div className="flex flex-col gap-2 mt-1">
-              <Button 
+              <Button
                 variant={activeStatusFilter === null ? "default" : "outline"}
                 size="sm"
                 className="justify-start"
@@ -331,7 +347,7 @@ export default function MapView() {
               >
                 <i className="fas fa-circle text-gray-400 mr-2"></i> All
               </Button>
-              <Button 
+              <Button
                 variant={activeStatusFilter === 'available' ? "default" : "outline"}
                 size="sm"
                 className="justify-start"
@@ -339,7 +355,7 @@ export default function MapView() {
               >
                 <StatusIndicator status="available" availability={100} showText size="sm" />
               </Button>
-              <Button 
+              <Button
                 variant={activeStatusFilter === 'busy' ? "default" : "outline"}
                 size="sm"
                 className="justify-start"
@@ -347,7 +363,7 @@ export default function MapView() {
               >
                 <StatusIndicator status="busy" availability={50} showText size="sm" />
               </Button>
-              <Button 
+              <Button
                 variant={activeStatusFilter === 'unavailable' ? "default" : "outline"}
                 size="sm"
                 className="justify-start"
@@ -359,8 +375,6 @@ export default function MapView() {
           </div>
         </div>
       )}
-
-
     </main>
   );
 }
