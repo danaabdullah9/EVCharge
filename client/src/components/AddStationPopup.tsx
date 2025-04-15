@@ -13,6 +13,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  NoOverlayDialog,
+  NoOverlayDialogContent,
+} from "@/components/ui/no-overlay-dialog";
 import { X, Plus } from "lucide-react";
 import { InsertStation } from "@shared/schema";
 
