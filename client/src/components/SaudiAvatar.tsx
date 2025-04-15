@@ -22,47 +22,57 @@ const SaudiAvatar: React.FC<SaudiAvatarProps> = ({
     xl: 'h-16 w-16'
   };
   
-  // Generate SVG for avatar fallback with Saudi-themed colors and design
+  // Generate SVG for avatar fallback with modern cartoon-style Saudi character
   const generateSaudiAvatarSvg = (initial: string) => {
-    // Saudi flag colors
+    // Colors
     const primaryColor = '#006c35'; // Saudi green
     const secondaryColor = '#ffffff'; // White
-    const accentColor = '#8d0000'; // Dark red for agal (headband)
-    const skinTone = '#ffe0b2'; // Light skin tone
+    const accentColor = '#000000'; // Black for agal (headband)
+    const skinTone = '#f9d3a5'; // Warm skin tone
+    const thirdColor = '#f0f0f0'; // Light gray
+    const fourthColor = '#e0e0e0'; // Darker gray
     
     return `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <!-- Background -->
-        <rect width="100" height="100" fill="${primaryColor}" />
+        <!-- Background - gradient circle -->
+        <circle cx="50" cy="50" r="50" fill="${thirdColor}" />
         
-        <!-- Saudi flag sword symbol -->
-        <path d="M20,85 L80,85 L80,80 L20,80 Z" fill="${secondaryColor}" />
-        <path d="M50,75 L50,85 L55,85 L55,75 Z" fill="${secondaryColor}" />
+        <!-- Modern styled background pattern -->
+        <path d="M0,80 L100,80 L100,100 L0,100 Z" fill="${primaryColor}" opacity="0.3" />
+        <path d="M0,85 L100,85 L100,95 L0,95 Z" fill="${primaryColor}" opacity="0.6" />
         
-        <!-- Traditional Saudi geometric pattern border -->
-        <rect x="5" y="5" width="90" height="90" rx="10" ry="10" fill="none" stroke="${secondaryColor}" stroke-width="2" />
-        <rect x="10" y="10" width="80" height="80" rx="5" ry="5" fill="none" stroke="${secondaryColor}" stroke-width="1" />
+        <!-- Face - modern cartoon style -->
+        <circle cx="50" cy="45" r="30" fill="${skinTone}" />
         
-        <!-- Saudi man with traditional ghutra and agal -->
-        <circle cx="50" cy="48" r="22" fill="${skinTone}" /> <!-- Face -->
+        <!-- Modern Saudi headdress (shemagh) -->
+        <path d="M50,15 C25,15 20,35 20,45 C20,55 25,70 50,70 C75,70 80,55 80,45 C80,35 75,15 50,15 Z" fill="${secondaryColor}" />
         
-        <!-- Ghutra (headdress) -->
-        <path d="M50,20 C30,20 25,35 25,45 C25,55 30,65 50,65 C70,65 75,55 75,45 C75,35 70,20 50,20 Z" fill="${secondaryColor}" />
+        <!-- Modern cartoon-style features -->
+        <ellipse cx="43" cy="43" rx="3" ry="4" fill="#333333" /> <!-- Left eye -->
+        <ellipse cx="57" cy="43" rx="3" ry="4" fill="#333333" /> <!-- Right eye -->
         
-        <!-- Agal (headband) -->
-        <path d="M28,35 C28,35 40,30 50,30 C60,30 72,35 72,35 C72,35 65,25 50,25 C35,25 28,35 28,35 Z" fill="${accentColor}" />
-        <path d="M25,36 C25,36 40,32 50,32 C60,32 75,36 75,36" fill="none" stroke="${accentColor}" stroke-width="3" />
+        <!-- Eyebrows -->
+        <path d="M38,37 C40,35 46,36 48,38" fill="none" stroke="#333333" stroke-width="1.5" stroke-linecap="round" />
+        <path d="M62,37 C60,35 54,36 52,38" fill="none" stroke="#333333" stroke-width="1.5" stroke-linecap="round" />
         
-        <!-- Stylized beard -->
-        <path d="M40,55 C40,65 50,70 50,70 C50,70 60,65 60,55" fill="none" stroke="#5e3200" stroke-width="1" />
+        <!-- Smile -->
+        <path d="M40,55 C45,61 55,61 60,55" fill="none" stroke="#333333" stroke-width="1.5" stroke-linecap="round" />
         
-        <!-- Saudi national dress suggestion at bottom -->
-        <path d="M30,70 L70,70 L70,90 L30,90 Z" fill="${secondaryColor}" />
-        <path d="M45,70 L55,70 L55,90 L45,90 Z" fill="${primaryColor}" opacity="0.3" />
+        <!-- Modern agal (headband) -->
+        <path d="M20,35 C35,25 65,25 80,35" fill="none" stroke="${accentColor}" stroke-width="4" />
+        <path d="M22,31 C35,21 65,21 78,31" fill="none" stroke="${accentColor}" stroke-width="4" />
         
-        <!-- Initial text -->
-        <text x="50" y="53" font-family="Arial, sans-serif" font-size="18" 
-          font-weight="bold" fill="#000" text-anchor="middle" dominant-baseline="middle">
+        <!-- Saudi flag-inspired decoration -->
+        <rect x="15" y="87" width="70" height="6" rx="3" ry="3" fill="${primaryColor}" />
+        <path d="M45,87 L55,87 L55,93 L45,93 Z" fill="${secondaryColor}" />
+        
+        <!-- Subtle pattern on headdress -->
+        <path d="M30,25 L70,25 L70,30 L30,30 Z" fill="${fourthColor}" opacity="0.1" />
+        
+        <!-- Initial styling at bottom -->
+        <circle cx="50" cy="80" r="10" fill="${primaryColor}" />
+        <text x="50" y="84" font-family="Arial, sans-serif" font-size="12" 
+          font-weight="bold" fill="${secondaryColor}" text-anchor="middle" dominant-baseline="middle">
           ${initial}
         </text>
       </svg>

@@ -221,7 +221,7 @@ export default function MapView() {
 
   return (
     <main className="flex-1 relative overflow-hidden h-full">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pt-16">
         {userLocation ? (
           <MapContainer 
             center={defaultPosition} 
