@@ -10,18 +10,18 @@ interface BottomNavigationProps {
 
 const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange }) => {
   const [location] = useLocation();
-  
+
   const handleNavigate = (path: string, tab: string) => {
     // Only navigate if we're not already on this page
     if (location !== path) {
       onTabChange(tab);
     }
   };
-  
+
   const isActive = (path: string) => {
     return location === path;
   };
-  
+
   const navItems = [
     { id: 'map', name: 'Explore', path: '/', icon: 'fa-location-dot' },
     { id: 'nearby', name: 'Near You', path: '/nearby', icon: 'fa-charging-station' },
@@ -30,7 +30,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-gray-100 flex justify-around items-center px-2 shadow-md z-[1000]">
+    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-gray-100 flex justify-around items-center px-2 shadow-lg z-[1000]"> {/* Added shadow-lg for prominence */}
       {navItems.map((item) => (
         <Link 
           key={item.id}
@@ -40,7 +40,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
         >
           <div 
             className={cn(
-              "flex flex-col items-center justify-center h-full relative transition-all duration-200",
+              "flex flex-col items-center justify-center h-full relative transition-all duration-200 text-lg", {/*Increased text size*/}
               isActive(item.path) ? "text-green-600 scale-105" : "text-gray-400 hover:text-gray-600"
             )}
           >
@@ -52,10 +52,10 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
               />
             )}
-            
-            <i className={`fas ${item.icon} text-lg`}></i>
-            
-            <span className="text-xs mt-1 font-medium">{item.name}</span>
+
+            <i className={`fas ${item.icon}`}></i> {/*Removed text-lg for better icon scaling*/}
+
+            <span className="mt-1 font-medium">{item.name}</span> {/*Removed text-xs for better visibility*/}
           </div>
         </Link>
       ))}
