@@ -13,7 +13,7 @@ const CarPlayButton: React.FC<CarPlayButtonProps> = ({
 }) => {
   return (
     <Button
-      className={`flex items-center justify-center w-full gap-3 py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl shadow-2xl border-2 border-blue-400 mx-auto max-w-lg ${className}`}
+      className={`flex items-center justify-center w-full gap-3 py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl shadow-xl ${className}`}
       onClick={onClick}
     >
       <div className="flex items-center">
