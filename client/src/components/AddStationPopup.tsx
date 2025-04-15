@@ -117,139 +117,141 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
   if (!isVisible) return null;
 
   return (
-    <div className="absolute left-4 bottom-32 bg-white p-4 rounded-lg shadow-lg border border-gray-100 z-[900] w-[300px] max-h-[450px] overflow-y-auto">
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="font-semibold text-green-700">Add New Charging Station</h3>
-        <button 
-          onClick={onClose}
-          className="h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-        >
-          <X size={16} className="text-gray-600" />
-        </button>
-      </div>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-[1.5px] z-[900] flex items-center justify-center">
+      <div className="bg-white p-5 rounded-xl shadow-xl border border-gray-100 z-[901] w-[360px] max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-300">
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="font-semibold text-green-700">Add New Charging Station</h3>
+          <button 
+            onClick={onClose}
+            className="h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          >
+            <X size={16} className="text-gray-600" />
+          </button>
+        </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="name" className="text-sm font-medium flex items-center mb-1">
-            <i className="fas fa-charging-station text-green-600 mr-2 text-xs"></i>
-            Station Name
-          </Label>
-          <Input
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Central Mall EV Station"
-            className="h-9 text-sm"
-            required
-          />
-        </div>
-        
-        <div>
-          <Label htmlFor="address" className="text-sm font-medium flex items-center mb-1">
-            <i className="fas fa-map-marker-alt text-green-600 mr-2 text-xs"></i>
-            Address
-          </Label>
-          <Input
-            id="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Full address"
-            className="h-9 text-sm"
-            required
-          />
-        </div>
-        
-        <div className="grid grid-cols-2 gap-2">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="chargerType" className="text-sm font-medium flex items-center mb-1">
-              <i className="fas fa-plug text-green-600 mr-2 text-xs"></i>
-              Charger Type
-            </Label>
-            <Select
-              value={chargerType}
-              onValueChange={setChargerType}
-              required
-            >
-              <SelectTrigger id="chargerType" className="h-9 text-sm">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="CCS">CCS</SelectItem>
-                <SelectItem value="CHAdeMO">CHAdeMO</SelectItem>
-                <SelectItem value="Type 2">Type 2</SelectItem>
-                <SelectItem value="Tesla">Tesla</SelectItem>
-                <SelectItem value="Multiple">Multiple</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div>
-            <Label htmlFor="powerOutput" className="text-sm font-medium flex items-center mb-1">
-              <i className="fas fa-bolt text-green-600 mr-2 text-xs"></i>
-              Power (kW)
+            <Label htmlFor="name" className="text-sm font-medium flex items-center mb-1">
+              <i className="fas fa-charging-station text-green-600 mr-2 text-xs"></i>
+              Station Name
             </Label>
             <Input
-              id="powerOutput"
-              type="number"
-              value={powerOutput}
-              onChange={(e) => setPowerOutput(e.target.value)}
-              placeholder="e.g. 150"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Central Mall EV Station"
               className="h-9 text-sm"
               required
             />
           </div>
-        </div>
-        
-        <div>
-          <Label htmlFor="hours" className="text-sm font-medium flex items-center mb-1">
-            <i className="fas fa-clock text-green-600 mr-2 text-xs"></i>
-            Operating Hours
-          </Label>
-          <Select
-            value={hours}
-            onValueChange={setHours}
-            required
-          >
-            <SelectTrigger id="hours" className="h-9 text-sm">
-              <SelectValue placeholder="Select hours" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="24/7">24/7</SelectItem>
-              <SelectItem value="6 AM - 10 PM">Daytime (6 AM - 10 PM)</SelectItem>
-              <SelectItem value="8 AM - 6 PM">Business (8 AM - 6 PM)</SelectItem>
-              <SelectItem value="Custom">Custom</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        
-        <div className="flex justify-end gap-2 pt-2">
-          <Button
-            type="button"
-            variant="outline"
-            className="h-8 px-3 text-xs"
-            onClick={onClose}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            className="bg-green-600 hover:bg-green-700 text-white h-8 px-3 text-xs"
-            disabled={addStationMutation.isPending}
-          >
-            {addStationMutation.isPending ? (
-              <>
-                <i className="fas fa-spinner fa-spin mr-1"></i>
-                Adding...
-              </>
-            ) : (
-              <>
-                <Plus size={14} className="mr-1" />
-                Add Station
-              </>
-            )}
-          </Button>
-        </div>
-      </form>
+          
+          <div>
+            <Label htmlFor="address" className="text-sm font-medium flex items-center mb-1">
+              <i className="fas fa-map-marker-alt text-green-600 mr-2 text-xs"></i>
+              Address
+            </Label>
+            <Input
+              id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Full address"
+              className="h-9 text-sm"
+              required
+            />
+          </div>
+          
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Label htmlFor="chargerType" className="text-sm font-medium flex items-center mb-1">
+                <i className="fas fa-plug text-green-600 mr-2 text-xs"></i>
+                Charger Type
+              </Label>
+              <Select
+                value={chargerType}
+                onValueChange={setChargerType}
+                required
+              >
+                <SelectTrigger id="chargerType" className="h-9 text-sm">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="CCS">CCS</SelectItem>
+                  <SelectItem value="CHAdeMO">CHAdeMO</SelectItem>
+                  <SelectItem value="Type 2">Type 2</SelectItem>
+                  <SelectItem value="Tesla">Tesla</SelectItem>
+                  <SelectItem value="Multiple">Multiple</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="powerOutput" className="text-sm font-medium flex items-center mb-1">
+                <i className="fas fa-bolt text-green-600 mr-2 text-xs"></i>
+                Power (kW)
+              </Label>
+              <Input
+                id="powerOutput"
+                type="number"
+                value={powerOutput}
+                onChange={(e) => setPowerOutput(e.target.value)}
+                placeholder="e.g. 150"
+                className="h-9 text-sm"
+                required
+              />
+            </div>
+          </div>
+          
+          <div>
+            <Label htmlFor="hours" className="text-sm font-medium flex items-center mb-1">
+              <i className="fas fa-clock text-green-600 mr-2 text-xs"></i>
+              Operating Hours
+            </Label>
+            <Select
+              value={hours}
+              onValueChange={setHours}
+              required
+            >
+              <SelectTrigger id="hours" className="h-9 text-sm">
+                <SelectValue placeholder="Select hours" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="24/7">24/7</SelectItem>
+                <SelectItem value="6 AM - 10 PM">Daytime (6 AM - 10 PM)</SelectItem>
+                <SelectItem value="8 AM - 6 PM">Business (8 AM - 6 PM)</SelectItem>
+                <SelectItem value="Custom">Custom</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-2">
+            <Button
+              type="button"
+              variant="outline"
+              className="h-8 px-3 text-xs"
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              className="bg-green-600 hover:bg-green-700 text-white h-8 px-3 text-xs"
+              disabled={addStationMutation.isPending}
+            >
+              {addStationMutation.isPending ? (
+                <>
+                  <i className="fas fa-spinner fa-spin mr-1"></i>
+                  Adding...
+                </>
+              ) : (
+                <>
+                  <Plus size={14} className="mr-1" />
+                  Add Station
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
