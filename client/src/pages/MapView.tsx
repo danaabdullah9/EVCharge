@@ -360,20 +360,7 @@ const MapView = () => {
         </div>
       )}
       
-      {/* CarPlay & Android Auto Button - Only on home page */}
-      {location === "/" && (
-        <div className="fixed left-0 right-0 bottom-20 px-4 z-40 mx-auto max-w-md">
-          <CarPlayButton 
-            onClick={() => {
-              toast({
-                title: "Car screen integration",
-                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
-                duration: 3000,
-              });
-            }}
-          />
-        </div>
-      )}
+
     </main>
   );
 };
