@@ -38,18 +38,30 @@ function App() {
           <div className="fixed left-4 bottom-48 z-[950]">
             <Button 
               variant="outline"
-              className="bg-white hover:bg-gray-50 rounded-full px-4 shadow-lg border border-gray-200 h-10 flex items-center"
+              className={`
+                rounded-full px-4 shadow-lg h-10 flex items-center transition-all duration-200
+                ${filtersVisible 
+                  ? "bg-gray-100 border-gray-300 ring-2 ring-gray-300 ring-opacity-50" 
+                  : "bg-white hover:bg-gray-50 border-gray-200"}
+              `}
               onClick={() => setFiltersVisible(!filtersVisible)}
             >
-              <i className="fas fa-sliders text-gray-800 mr-1.5"></i>
-              <span className="text-sm font-medium">Filter</span>
+              <i className={`fas ${filtersVisible ? 'fa-times' : 'fa-sliders'} text-gray-800 mr-1.5`}></i>
+              <span className="text-sm font-medium">{filtersVisible ? 'Close Filter' : 'Filter'}</span>
             </Button>
           </div>
         )}
         
         {/* Status Filter Sheet - Only on Explorer (Map) page */}
-        {location === "/" && filtersVisible && (
-          <div className="fixed left-0 bottom-40 ml-20 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-[950] w-[260px] max-h-[280px] overflow-y-auto custom-scrollbar">
+        {location === "/" && (
+          <div className={`
+            fixed left-4 bottom-40 lg:left-20 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-[950] 
+            w-[280px] sm:w-[320px] max-h-[280px] overflow-y-auto custom-scrollbar
+            transition-all duration-300
+            ${filtersVisible 
+              ? 'opacity-100 translate-y-0 scale-100' 
+              : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}
+          `}>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                 <h3 className="font-semibold text-xs text-gray-700">Filter by Status</h3>

@@ -108,10 +108,16 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
     setAmenities([]);
   };
 
-  if (!isVisible) return null;
-
   return (
-    <div className="absolute left-0 bottom-40 ml-20 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-[800] w-[260px] animate-in slide-in-from-left-5 duration-200 max-h-[320px]">
+    <div 
+      className={`
+        fixed left-4 bottom-40 lg:left-20 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-[800]
+        w-[280px] sm:w-[320px] max-h-[340px] transition-all duration-300 
+        ${isVisible 
+          ? 'opacity-100 translate-y-0 scale-100' 
+          : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}
+      `}
+    >
       <div className="flex justify-between items-center mb-2">
         <h3 className="font-semibold text-xs text-green-700">Add New Charging Station</h3>
         <button 

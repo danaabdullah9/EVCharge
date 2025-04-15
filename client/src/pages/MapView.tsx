@@ -138,9 +138,9 @@ export default function MapView() {
     setBottomSheetExpanded(true);
   };
 
-  // Handle adding a new station
+  // Handle adding a new station (toggle behavior)
   const handleAddStation = () => {
-    setAddStationModalVisible(true);
+    setAddStationModalVisible(prev => !prev);
   };
 
   // Handle reporting a station
@@ -224,7 +224,7 @@ export default function MapView() {
   return (
     <main className="flex-1 relative overflow-hidden h-full">
       {/* Add Station Button on the left side */}
-      <AddStationButton onClick={handleAddStation} />
+      <AddStationButton onClick={handleAddStation} isActive={addStationModalVisible} />
       
       <div className="absolute inset-0">
         {userLocation ? (

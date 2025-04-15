@@ -27,22 +27,37 @@
 }
 
 @layer utilities {
+  .custom-scrollbar {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #cfcfcf #f1f1f1; /* Firefox */
+  }
+  
   .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
     background: #f1f1f1;
-    border-radius: 4px;
+    border-radius: 8px;
+    margin: 2px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #cfcfcf;
-    border-radius: 4px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #10b981;
+  }
+  
+  /* Make scrollbars not appear on touch-based devices */
+  @media (hover: none) {
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 2px;
+      height: 2px;
+    }
   }
 }
