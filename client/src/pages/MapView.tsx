@@ -8,7 +8,7 @@ import { useUserLocation } from "@/hooks/useUserLocation";
 import { cn } from "@/lib/utils";
 import { MdRefresh, MdFilterList } from "react-icons/md";
 
-function MapView() {
+export default function MapView() {
   const { stations, isLoading } = useStations();
   const { location, error: locationError, getLocation } = useUserLocation();
   const [showFilters, setShowFilters] = useState(false);

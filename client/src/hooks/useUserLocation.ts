@@ -1,31 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from 'react';
 
-type LocationTuple = [number, number] | null;
+interface Location {
+  latitude: number;
+  longitude: number;
+}
 
-const useUserLocation = () => {
-  const [location, setLocation] = useState<LocationTuple>(null);
+export function useUserLocation() {
+  const [location, setLocation] = useState<Location | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const getLocation = () => {
+  const getLocation = useCallback(() => {
+    setLoading(true);
     if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser");
+      setError('Geolocation is not supported by your browser');
       setLoading(false);
       return;
     }
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setLocation([position.coords.latitude, position.coords.longitude]);
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
         setLoading(false);
         setError(null);
       },
-      (err) => {
-        setError(`Error getting location: ${err.message}`);
+      (error) => {
+        setError(error.message);
         setLoading(false);
-        
         // Fallback to Saudi Arabia center if geolocation fails
-        setLocation([24.7136, 46.6753]);
+        setLocation({latitude: 24.7136, longitude: 46.6753});
       },
       {
         enableHighAccuracy: true,
@@ -33,19 +39,11 @@ const useUserLocation = () => {
         maximumAge: 0
       }
     );
-  };
-
-  // Get location on mount
-  useEffect(() => {
-    getLocation();
   }, []);
 
-  return {
-    location,
-    loading,
-    error,
-    refreshLocation: getLocation
-  };
-};
+  useEffect(() => {
+    getLocation();
+  }, [getLocation]);
 
-export default useUserLocation;
+  return { location, error, loading, getLocation };
+}
