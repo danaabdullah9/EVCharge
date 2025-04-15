@@ -128,7 +128,13 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
 
   return (
     <Dialog open={isVisible} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md mx-auto max-h-[90vh] overflow-y-auto">
+        <button 
+          className="absolute right-4 top-4 rounded-full w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors"
+          onClick={onClose}
+        >
+          <i className="fas fa-times text-gray-600"></i>
+        </button>
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-green-700">Add New Charging Station</DialogTitle>
           <DialogDescription className="flex items-center mt-2">
