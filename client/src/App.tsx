@@ -17,7 +17,7 @@ function App() {
   const { toast } = useToast();
 
   return (
-    <div className="app-container h-screen flex flex-col">
+    <div className="app-container h-screen flex flex-col pb-40">
       <Header />
       
       <Switch>
@@ -29,16 +29,18 @@ function App() {
       </Switch>
       
       {location === "/" && (
-        <div className="fixed left-0 right-0 bottom-24 px-4 z-40 mx-auto max-w-md">
-          <CarPlayButton 
-            onClick={() => {
-              toast({
-                title: "Car screen integration",
-                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
-                duration: 3000,
-              });
-            }}
-          />
+        <div className="fixed left-0 right-0 bottom-[4.5rem] px-4 z-[900] mx-auto max-w-md">
+          <div className="bg-white p-2 rounded-xl shadow-xl">
+            <CarPlayButton 
+              onClick={() => {
+                toast({
+                  title: "Car screen integration",
+                  description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                  duration: 3000,
+                });
+              }}
+            />
+          </div>
         </div>
       )}
       
