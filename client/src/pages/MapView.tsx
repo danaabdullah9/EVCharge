@@ -221,6 +221,20 @@ export default function MapView() {
 
   return (
     <main className="flex-1 relative overflow-hidden h-full">
+      {/* Add Station Button - Floating Action Button */}
+      <div className="group fixed bottom-28 right-4 z-[800]">
+        <button
+          onClick={handleAddStation}
+          className="w-14 h-14 rounded-full bg-green-600 text-white shadow-xl flex items-center justify-center hover:bg-green-700 transition-all hover:scale-105 transform hover:rotate-90"
+          aria-label="Add Station"
+        >
+          <i className="fas fa-plus text-xl"></i>
+        </button>
+        <span className="absolute -top-10 right-0 bg-white px-3 py-1.5 rounded-full text-sm font-medium text-gray-800 shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+          Add Station
+        </span>
+      </div>
+      
       <div className="absolute inset-0">
         {userLocation ? (
           <MapContainer 
