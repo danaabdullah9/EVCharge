@@ -130,8 +130,9 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
     <Dialog open={isVisible} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">Add New Charging Station</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl font-bold text-green-700">Add New Charging Station</DialogTitle>
+          <DialogDescription className="flex items-center mt-2">
+            <i className="fas fa-award text-green-600 mr-2"></i>
             Share a charging station with the community and earn 50 points.
           </DialogDescription>
         </DialogHeader>
@@ -139,36 +140,57 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="name">Station Name</Label>
-              <Input
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Central Mall EV Station"
-                required
-              />
+              <Label htmlFor="name" className="flex items-center">
+                <i className="fas fa-charging-station text-green-600 mr-2"></i>
+                Station Name
+              </Label>
+              <div className="relative">
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Central Mall EV Station"
+                  className="pl-10 focus-within:border-green-600"
+                  required
+                />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <i className="fas fa-tag text-gray-400"></i>
+                </div>
+              </div>
             </div>
             
             <div className="grid gap-2">
-              <Label htmlFor="address">Address</Label>
-              <Input
-                id="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Full address"
-                required
-              />
+              <Label htmlFor="address" className="flex items-center">
+                <i className="fas fa-map-marker-alt text-green-600 mr-2"></i>
+                Address
+              </Label>
+              <div className="relative">
+                <Input
+                  id="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Full address"
+                  className="pl-10 focus-within:border-green-600"
+                  required
+                />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <i className="fas fa-location-dot text-gray-400"></i>
+                </div>
+              </div>
             </div>
             
             <div className="grid grid-cols-2 gap-3">
               <div className="grid gap-2">
-                <Label htmlFor="chargerType">Charger Type</Label>
+                <Label htmlFor="chargerType" className="flex items-center">
+                  <i className="fas fa-plug text-green-600 mr-2"></i>
+                  Charger Type
+                </Label>
                 <Select
                   value={chargerType}
                   onValueChange={setChargerType}
                   required
                 >
-                  <SelectTrigger id="chargerType">
+                  <SelectTrigger id="chargerType" className="focus:ring-green-600">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -183,26 +205,38 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
               </div>
               
               <div className="grid gap-2">
-                <Label htmlFor="powerOutput">Max Power (kW)</Label>
-                <Input
-                  id="powerOutput"
-                  type="number"
-                  value={powerOutput}
-                  onChange={(e) => setPowerOutput(e.target.value)}
-                  placeholder="e.g. 150"
-                  required
-                />
+                <Label htmlFor="powerOutput" className="flex items-center">
+                  <i className="fas fa-bolt text-green-600 mr-2"></i>
+                  Max Power (kW)
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="powerOutput"
+                    type="number"
+                    value={powerOutput}
+                    onChange={(e) => setPowerOutput(e.target.value)}
+                    placeholder="e.g. 150"
+                    className="pl-10 focus-within:border-green-600"
+                    required
+                  />
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i className="fas fa-gauge-high text-gray-400"></i>
+                  </div>
+                </div>
               </div>
             </div>
             
             <div className="grid gap-2">
-              <Label htmlFor="hours">Operating Hours</Label>
+              <Label htmlFor="hours" className="flex items-center">
+                <i className="fas fa-clock text-green-600 mr-2"></i>
+                Operating Hours
+              </Label>
               <Select
                 value={hours}
                 onValueChange={setHours}
                 required
               >
-                <SelectTrigger id="hours">
+                <SelectTrigger id="hours" className="focus:ring-green-600">
                   <SelectValue placeholder="Select hours" />
                 </SelectTrigger>
                 <SelectContent>
@@ -215,59 +249,76 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
             </div>
             
             <div className="grid gap-2">
-              <Label htmlFor="price">Price (optional)</Label>
-              <Input
-                id="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="e.g. 0.75 SAR/kWh"
-              />
+              <Label htmlFor="price" className="flex items-center">
+                <i className="fas fa-tag text-green-600 mr-2"></i>
+                Price (optional)
+              </Label>
+              <div className="relative">
+                <Input
+                  id="price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  placeholder="e.g. 0.75 SAR/kWh"
+                  className="pl-10 focus-within:border-green-600"
+                />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <i className="fas fa-money-bill text-gray-400"></i>
+                </div>
+              </div>
             </div>
             
             <div className="grid gap-2">
-              <Label>Amenities</Label>
-              <div className="flex flex-wrap gap-2">
+              <Label className="flex items-center">
+                <i className="fas fa-concierge-bell text-green-600 mr-2"></i>
+                <span>Amenities Available</span>
+              </Label>
+              <div className="flex flex-wrap gap-3 mt-1">
                 {[
-                  'WiFi',
-                  'Café',
-                  'Restroom',
-                  'Shopping',
-                  'Parking',
-                  'Restaurant'
-                ].map((amenity) => (
+                  { name: 'WiFi', icon: 'fa-wifi' },
+                  { name: 'Café', icon: 'fa-coffee' },
+                  { name: 'Restroom', icon: 'fa-toilet' },
+                  { name: 'Shopping', icon: 'fa-shopping-bag' },
+                  { name: 'Parking', icon: 'fa-parking' },
+                  { name: 'Restaurant', icon: 'fa-utensils' }
+                ].map(({ name, icon }) => (
                   <label
-                    key={amenity}
+                    key={name}
                     className={`
-                      flex items-center space-x-2 bg-gray-100 rounded-full px-3 py-1 text-sm cursor-pointer
-                      ${amenities.includes(amenity) ? 'bg-green-100 border border-green-500' : ''}
+                      flex items-center gap-2 rounded-full px-3 py-2 text-sm cursor-pointer transition-all
+                      ${amenities.includes(name) 
+                        ? 'bg-green-100 border border-green-500 text-green-800 shadow-sm' 
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}
                     `}
                   >
                     <Checkbox
-                      checked={amenities.includes(amenity)}
-                      onCheckedChange={() => toggleAmenity(amenity)}
+                      checked={amenities.includes(name)}
+                      onCheckedChange={() => toggleAmenity(name)}
                       className="mr-1 data-[state=checked]:bg-green-600 data-[state=checked]:text-white"
                     />
-                    <span>{amenity}</span>
+                    <i className={`fas ${icon} mr-1 ${amenities.includes(name) ? 'text-green-600' : ''}`}></i>
+                    <span>{name}</span>
                   </label>
                 ))}
               </div>
             </div>
           </div>
           
-          <DialogFooter>
+          <DialogFooter className="pt-2">
             <Button
               type="button"
               variant="outline"
+              className="border-gray-300 hover:bg-gray-100"
               onClick={() => {
                 resetForm();
                 onClose();
               }}
             >
+              <i className="fas fa-times mr-2"></i>
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-green-600 hover:bg-green-700 text-white shadow-md"
               disabled={addStationMutation.isPending}
             >
               {addStationMutation.isPending ? (
@@ -276,7 +327,10 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
                   Submitting...
                 </>
               ) : (
-                'Submit'
+                <>
+                  <i className="fas fa-check mr-2"></i>
+                  Submit
+                </>
               )}
             </Button>
           </DialogFooter>

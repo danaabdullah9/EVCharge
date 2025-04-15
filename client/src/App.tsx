@@ -111,7 +111,7 @@ function App() {
         )}
         
         {/* CarPlay Button - Positioned at the bottom above nav */}
-        <div className="fixed bottom-16 left-0 right-0 z-[900] px-4 pb-2">
+        <div className="fixed bottom-20 left-0 right-0 z-[900] px-4 pb-2">
           <CarPlayButton 
             onClick={() => {
               toast({
