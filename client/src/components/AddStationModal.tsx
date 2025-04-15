@@ -128,7 +128,7 @@ const AddStationModal = ({ isVisible, onClose, userLocation }: AddStationModalPr
 
   return (
     <Dialog open={isVisible} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto w-[95%] rounded-xl border-0 shadow-xl">
+      <DialogContent className="sm:max-w-md w-[95%] rounded-xl border border-gray-200 shadow-2xl py-6 mt-12 mb-4">
         <button 
           className="absolute right-4 top-4 rounded-full w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors"
           onClick={onClose}
