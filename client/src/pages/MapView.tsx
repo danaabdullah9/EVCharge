@@ -105,7 +105,7 @@ const UserLocationMarker = ({ position }: { position: [number, number] }) => {
   );
 };
 
-const MapView = () => {
+export default function MapView() {
   const { toast } = useToast();
   const [location] = useLocation();
   

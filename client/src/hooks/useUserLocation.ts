@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 type LocationTuple = [number, number] | null;
 
-const useUserLocation = () => {
+export default function useUserLocation() {
   const [location, setLocation] = useState<LocationTuple>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
