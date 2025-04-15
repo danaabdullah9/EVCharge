@@ -29,7 +29,7 @@ function App() {
       </Switch>
       
       {location === "/" && (
-        <div className="fixed left-0 right-0 bottom-[4.5rem] px-4 z-[900] mx-auto max-w-md shadow-xl rounded-xl">
+        <div className="fixed left-0 right-0 bottom-[4.5rem] px-4 z-[900] mx-auto max-w-md">
           <CarPlayButton 
             onClick={() => {
               toast({
