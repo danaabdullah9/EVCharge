@@ -11,23 +11,14 @@ import CarPlayButton from "@/components/CarPlayButton";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import AddStationModal from "@/components/AddStationModal";
 import StatusIndicator from "@/components/StatusIndicator";
-import useUserLocation from "@/hooks/useUserLocation";
 
 function App() {
   const [activeTab, setActiveTab] = useState("map");
   const [location] = useLocation();
   const { toast } = useToast();
-  const { location: userLocation } = useUserLocation();
-  const [addStationModalVisible, setAddStationModalVisible] = useState(false);
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [activeStatusFilter, setActiveStatusFilter] = useState<string | null>(null);
-
-  // Handle adding a new station
-  const handleAddStation = () => {
-    setAddStationModalVisible(true);
-  };
 
   return (
     <div className="app-container h-screen flex flex-col">
@@ -41,18 +32,6 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route component={NotFound} />
         </Switch>
-        
-        {/* Add Station Button - Only on Explorer (Map) page */}
-        {location === "/" && (
-          <div className="fixed left-4 bottom-24 z-[950]">
-            <Button 
-              className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg w-12 h-12"
-              onClick={handleAddStation}
-            >
-              <i className="fas fa-plus text-xl"></i>
-            </Button>
-          </div>
-        )}
         
         {/* Filter Button - Only on Explorer (Map) page */}
         {location === "/" && (
@@ -126,13 +105,6 @@ function App() {
       
       <BottomNavigation active={activeTab} onTabChange={setActiveTab} />
       <Toaster />
-      
-      {/* Add Station Modal */}
-      <AddStationModal 
-        isVisible={addStationModalVisible}
-        onClose={() => setAddStationModalVisible(false)}
-        userLocation={userLocation}
-      />
     </div>
   );
 }
