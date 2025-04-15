@@ -117,7 +117,7 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
   if (!isVisible) return null;
 
   return (
-    <div className="absolute left-4 bottom-32 bg-white p-5 rounded-lg shadow-lg border border-gray-200 z-[900] w-[320px] max-h-[500px] overflow-y-auto">
+    <div className="absolute left-4 bottom-32 bg-white p-4 rounded-lg shadow-lg border border-gray-100 z-[900] w-[300px] max-h-[450px] overflow-y-auto">
       <div className="flex justify-between items-center mb-3">
         <h3 className="font-semibold text-green-700">Add New Charging Station</h3>
         <button 
