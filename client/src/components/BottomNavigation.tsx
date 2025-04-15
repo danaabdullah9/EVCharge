@@ -23,14 +23,14 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
   };
   
   const navItems = [
-    { id: 'map', name: 'Map', path: '/', icon: 'fa-map' },
-    { id: 'nearby', name: 'Nearby', path: '/nearby', icon: 'fa-bolt' },
-    { id: 'favorites', name: 'Favorites', path: '/favorites', icon: 'fa-heart' },
-    { id: 'profile', name: 'Profile', path: '/profile', icon: 'fa-user' },
+    { id: 'map', name: 'Explore', path: '/', icon: 'fa-location-dot' },
+    { id: 'nearby', name: 'Near You', path: '/nearby', icon: 'fa-charging-station' },
+    { id: 'favorites', name: 'Saved', path: '/favorites', icon: 'fa-star' },
+    { id: 'profile', name: 'Account', path: '/profile', icon: 'fa-circle-user' },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex justify-around items-center px-2 shadow-lg z-[1000]">
+    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-gray-100 flex justify-around items-center px-2 shadow-md z-[1000]">
       {navItems.map((item) => (
         <Link 
           key={item.id}
@@ -40,8 +40,8 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
         >
           <div 
             className={cn(
-              "flex flex-col items-center justify-center h-full relative transition-colors duration-200",
-              isActive(item.path) ? "text-green-600" : "text-gray-500 hover:text-gray-700"
+              "flex flex-col items-center justify-center h-full relative transition-all duration-200",
+              isActive(item.path) ? "text-green-600 scale-105" : "text-gray-400 hover:text-gray-600"
             )}
           >
             {isActive(item.path) && (
