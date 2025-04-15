@@ -1,7 +1,8 @@
+
 import { useQuery } from "@tanstack/react-query";
 import { StationWithStats } from "@shared/schema";
 
-export default function useStations() {
+export function useStations() {
   const { data, isLoading, isError, error } = useQuery<StationWithStats[]>({
     queryKey: ['/api/stations'],
     staleTime: 60000
@@ -14,3 +15,5 @@ export default function useStations() {
     error
   };
 }
+
+export default useStations;
