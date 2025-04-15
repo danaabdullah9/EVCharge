@@ -6,7 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -34,15 +33,6 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
   const [hours, setHours] = useState("");
   const [price, setPrice] = useState("");
   const [amenities, setAmenities] = useState<string[]>([]);
-  
-  // Toggle amenity selection
-  const toggleAmenity = (amenity: string) => {
-    if (amenities.includes(amenity)) {
-      setAmenities(amenities.filter(a => a !== amenity));
-    } else {
-      setAmenities([...amenities, amenity]);
-    }
-  };
   
   // Handle form submission
   const addStationMutation = useMutation({
@@ -118,7 +108,7 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-[1.5px] z-[900] flex items-center justify-center">
-      <div className="bg-white p-5 rounded-xl shadow-xl border border-gray-100 z-[901] w-[360px] max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-300">
+      <div className="bg-white p-5 rounded-xl shadow-xl border border-gray-100 z-[901] w-[350px] max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-300">
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-semibold text-green-700">Add New Charging Station</h3>
           <button 
