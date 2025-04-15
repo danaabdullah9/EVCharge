@@ -107,6 +107,7 @@ const UserLocationMarker = ({ position }: { position: [number, number] }) => {
 
 const MapView = () => {
   const { toast } = useToast();
+  const [location] = useLocation();
   
   // Get user location
   const { location: userLocation, refreshLocation } = useUserLocation();
@@ -360,7 +361,7 @@ const MapView = () => {
       )}
       
       {/* CarPlay & Android Auto Button - Only on home page */}
-      {location === '/' && (
+      {location === "/" && (
         <div className="fixed left-0 right-0 bottom-20 px-4 z-40 mx-auto max-w-md">
           <CarPlayButton 
             onClick={() => {
