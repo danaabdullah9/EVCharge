@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { queryClient } from "@/lib/queryClient";
+import { useLocation } from "wouter";
 import useUserLocation from "@/hooks/useUserLocation";
 import useStations from "@/hooks/useStations";
 import StationMarker from "@/components/StationMarker";
@@ -13,6 +14,7 @@ import AddStationModal from "@/components/AddStationModal";
 import ReportStationModal from "@/components/ReportStationModal";
 import NavigationHelper from "@/components/NavigationHelper";
 import StatusIndicator from "@/components/StatusIndicator";
+import CarPlayButton from "@/components/CarPlayButton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StationWithStats } from "@shared/schema";
@@ -354,6 +356,21 @@ const MapView = () => {
               </Button>
             </div>
           </div>
+        </div>
+      )}
+      
+      {/* CarPlay & Android Auto Button - Only on home page */}
+      {location === '/' && (
+        <div className="fixed left-0 right-0 bottom-20 px-4 z-40 mx-auto max-w-md">
+          <CarPlayButton 
+            onClick={() => {
+              toast({
+                title: "Car screen integration",
+                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                duration: 3000,
+              });
+            }}
+          />
         </div>
       )}
     </main>
