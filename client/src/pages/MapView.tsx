@@ -105,49 +105,49 @@ const UserLocationMarker = ({ position }: { position: [number, number] }) => {
   );
 };
 
-const MapView = () => {
+export default function MapView() {
   const { toast } = useToast();
   const [location] = useLocation();
-  
+
   // Get user location
   const { location: userLocation, refreshLocation } = useUserLocation();
-  
+
   // Get stations
   const { stations, isLoading } = useStations();
-  
+
   // State for bottom sheet
   const [selectedStation, setSelectedStation] = useState<StationWithStats | null>(null);
   const [bottomSheetExpanded, setBottomSheetExpanded] = useState(false);
-  
+
   // State for modals
   const [addStationModalVisible, setAddStationModalVisible] = useState(false);
   const [reportModalVisible, setReportModalVisible] = useState(false);
   const [navigationModalVisible, setNavigationModalVisible] = useState(false);
-  
+
   // Filter menu
   const [filtersVisible, setFiltersVisible] = useState(false);
-  
+
   // Filter stations by status
   const [activeStatusFilter, setActiveStatusFilter] = useState<string | null>(null);
-  
+
   // Handle station selection
   const handleStationSelect = (station: StationWithStats) => {
     setSelectedStation(station);
     setBottomSheetExpanded(true);
   };
-  
+
   // Handle adding a new station
   const handleAddStation = () => {
     setAddStationModalVisible(true);
   };
-  
+
   // Handle reporting a station
   const handleShowReportForm = () => {
     if (selectedStation) {
       setReportModalVisible(true);
     }
   };
-  
+
   // Handle favorite toggle
   const toggleFavoriteMutation = useMutation({
     mutationFn: async ({ stationId, isFavorite }: { stationId: number, isFavorite: boolean }) => {
@@ -162,11 +162,11 @@ const MapView = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/stations'] });
       queryClient.invalidateQueries({ queryKey: ['/api/favorites'] });
-      
+
       if (selectedStation) {
         const newIsFavorite = !selectedStation.isFavorite;
         setSelectedStation({ ...selectedStation, isFavorite: newIsFavorite });
-        
+
         toast({
           title: newIsFavorite ? "Added to favorites" : "Removed from favorites",
           description: `${selectedStation.name} has been ${newIsFavorite ? 'added to' : 'removed from'} your favorites.`,
@@ -175,7 +175,7 @@ const MapView = () => {
       }
     }
   });
-  
+
   // Handle favoriting a station
   const handleToggleFavorite = () => {
     if (selectedStation) {
@@ -185,7 +185,7 @@ const MapView = () => {
       });
     }
   };
-  
+
   // Handle navigation
   const handleStartNavigation = () => {
     if (selectedStation) {
@@ -193,7 +193,7 @@ const MapView = () => {
       setNavigationModalVisible(true);
     }
   };
-  
+
   // Share station
   const handleShareStation = () => {
     if (selectedStation) {
@@ -214,7 +214,7 @@ const MapView = () => {
       }
     }
   };
-  
+
   // Default position (Saudi Arabia's center)
   const saudiArabiaCenter: [number, number] = [24.7136, 46.6753];
   const defaultPosition = userLocation || saudiArabiaCenter;
@@ -233,11 +233,11 @@ const MapView = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            
+
             {userLocation && (
               <UserLocationMarker position={userLocation} />
             )}
-            
+
             {stations.map((station) => (
               <StationMarker 
                 key={station.id}
@@ -245,7 +245,7 @@ const MapView = () => {
                 onSelect={() => handleStationSelect(station)}
               />
             ))}
-            
+
             <MapController userLocation={defaultPosition} onLocationUpdate={refreshLocation} />
           </MapContainer>
         ) : (
@@ -256,7 +256,7 @@ const MapView = () => {
             </div>
           </div>
         )}
-        
+
         {/* Add Station Button */}
         <Button 
           className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 absolute left-4 bottom-24 shadow-lg w-12 h-12"
@@ -264,7 +264,7 @@ const MapView = () => {
         >
           <i className="fas fa-plus text-xl"></i>
         </Button>
-        
+
         {/* Filter Button */}
         <div className="absolute left-4 bottom-40 flex flex-col gap-2">
           <Button 
@@ -276,7 +276,7 @@ const MapView = () => {
           </Button>
         </div>
       </div>
-      
+
       {/* Bottom Sheet */}
       {selectedStation && (
         <BottomSheet 
@@ -289,14 +289,14 @@ const MapView = () => {
           onAddReport={handleShowReportForm}
         />
       )}
-      
+
       {/* Add Station Modal */}
       <AddStationModal 
         isVisible={addStationModalVisible}
         onClose={() => setAddStationModalVisible(false)}
         userLocation={userLocation}
       />
-      
+
       {/* Report Station Modal */}
       {selectedStation && (
         <ReportStationModal 
@@ -305,7 +305,7 @@ const MapView = () => {
           onClose={() => setReportModalVisible(false)}
         />
       )}
-      
+
       {/* Navigation Helper Modal */}
       {selectedStation && (
         <NavigationHelper
@@ -316,7 +316,7 @@ const MapView = () => {
           longitude={selectedStation.longitude}
         />
       )}
-      
+
       {/* Status Filter Sheet */}
       {filtersVisible && (
         <div className="absolute left-0 bottom-20 ml-20 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-20">
@@ -359,10 +359,8 @@ const MapView = () => {
           </div>
         </div>
       )}
-      
+
 
     </main>
   );
-};
-
-export default MapView;
+}

@@ -16,7 +16,7 @@ const CarPlayButton: React.FC<CarPlayButtonProps> = ({
       className={`flex items-center justify-center w-full gap-3 py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl shadow-2xl border-2 border-white/20 backdrop-blur-sm ${className}`}
       onClick={onClick}
     >
-      <div className="flex items-center">
+      <div className="flex items-center" />
         <motion.div
           className="mr-3 flex items-center justify-center"
           whileHover={{ scale: 1.1 }}
