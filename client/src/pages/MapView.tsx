@@ -220,8 +220,8 @@ const MapView = () => {
   const defaultPosition = userLocation || saudiArabiaCenter;
 
   return (
-    <main className="flex-1 relative overflow-hidden">
-      <div className="map-container relative h-full">
+    <main className="flex-1 relative overflow-hidden h-full">
+      <div className="absolute inset-0">
         {userLocation ? (
           <MapContainer 
             center={defaultPosition} 

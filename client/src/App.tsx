@@ -20,7 +20,7 @@ function App() {
     <div className="app-container h-screen flex flex-col">
       <Header />
       
-      <div className="flex-1 relative">
+      <div className="flex-1 relative flex flex-col">
         <Switch>
           <Route path="/" component={MapView} />
           <Route path="/nearby" component={Nearby} />
