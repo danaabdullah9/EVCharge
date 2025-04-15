@@ -29,19 +29,17 @@ function App() {
           <Route component={NotFound} />
         </Switch>
         
-        {location === "/" && (
-          <div className="absolute bottom-16 left-0 right-0">
-            <CarPlayButton 
-              onClick={() => {
-                toast({
-                  title: "Car screen integration",
-                  description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
-                  duration: 3000,
-                });
-              }}
-            />
-          </div>
-        )}
+        <div className="fixed bottom-16 left-0 right-0 z-50 px-4">
+          <CarPlayButton 
+            onClick={() => {
+              toast({
+                title: "Car screen integration",
+                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                duration: 3000,
+              });
+            }}
+          />
+        </div>
       </div>
       
       <BottomNavigation active={activeTab} onTabChange={setActiveTab} />
