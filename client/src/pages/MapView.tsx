@@ -8,6 +8,7 @@ import { queryClient } from "@/lib/queryClient";
 import { useLocation } from "wouter";
 import useUserLocation from "@/hooks/useUserLocation";
 import useStations from "@/hooks/useStations";
+import { ModalProvider } from "@/lib/modalContext";
 import StationMarker from "@/components/StationMarker";
 import BottomSheet from "@/components/BottomSheet";
 import AddStationPopup from "@/components/AddStationPopup";
