@@ -13,14 +13,10 @@ const CarPlayButton: React.FC<CarPlayButtonProps> = ({
 }) => {
   return (
     <Button
-      className={`flex items-center justify-center w-full gap-2 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl ${className}`}
+      className={`flex items-center justify-center w-full gap-3 py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl shadow-2xl border-2 border-white/20 backdrop-blur-sm ${className}`}
       onClick={onClick}
     >
-      <i className="fas fa-car text-xl"></i>
-      <div className="flex flex-col items-center text-sm">
-        <span>Add to Car Screen</span>
-        <span className="text-xs text-white/80">CarPlay & Android Auto</span>
-      </div>
+      <div className="flex items-center">
         <motion.div
           className="mr-3 flex items-center justify-center"
           whileHover={{ scale: 1.1 }}
