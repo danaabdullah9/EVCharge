@@ -1,21 +1,24 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface AddStationButtonProps {
   onClick: () => void;
+  className?: string;
 }
 
-const AddStationButton: React.FC<AddStationButtonProps> = ({ onClick }) => {
+const AddStationButton: React.FC<AddStationButtonProps> = ({ onClick, className }) => {
   return (
-    <div className="fixed left-4 bottom-24 z-[750]">
-      <button
-        onClick={onClick}
-        className="w-12 h-12 rounded-full bg-green-600 text-white shadow-lg flex items-center justify-center hover:bg-green-700 transition-all"
-        aria-label="Add Station"
-      >
-        <Plus size={20} className="text-white" />
-      </button>
-    </div>
+    <button
+      onClick={onClick}
+      className={cn(
+        "fixed left-4 bottom-24 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-50 border border-gray-200 z-[750]",
+        className
+      )}
+      aria-label="Add Station"
+    >
+      <Plus size={18} className="text-green-600" />
+    </button>
   );
 };
 
