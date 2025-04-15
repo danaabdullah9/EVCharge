@@ -1,27 +1,18 @@
-
 import { useQuery } from "@tanstack/react-query";
+import { StationWithStats } from "@shared/schema";
 
-interface Station {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  status: string;
-  availability: number;
-  reliability: number;
-}
-
-export function useStations() {
-  const { data: stations, isLoading, error } = useQuery<Station[]>({
-    queryKey: ["stations"],
-    queryFn: async () => {
-      const response = await fetch("/api/stations");
-      if (!response.ok) {
-        throw new Error("Failed to fetch stations");
-      }
-      return response.json();
-    }
+const useStations = () => {
+  const { data, isLoading, isError, error } = useQuery<StationWithStats[]>({
+    queryKey: ['/api/stations'],
+    staleTime: 60000, // 1 minute
   });
 
-  return { stations, isLoading, error };
-}
+  return {
+    stations: data || [],
+    isLoading,
+    isError,
+    error,
+  };
+};
+
+export default useStations;

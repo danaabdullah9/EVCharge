@@ -40,7 +40,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
         >
           <div 
             className={cn(
-              "flex flex-col items-center justify-center h-full relative transition-all duration-200 text-lg",
+              "flex flex-col items-center justify-center h-full relative transition-all duration-200 text-lg", {/*Increased text size*/}
               isActive(item.path) ? "text-green-600 scale-105" : "text-gray-400 hover:text-gray-600"
             )}
           >
