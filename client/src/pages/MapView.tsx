@@ -221,7 +221,7 @@ export default function MapView() {
 
   return (
     <main className="flex-1 relative overflow-hidden h-full">
-      <div className="absolute inset-0 pt-16">
+      <div className="absolute inset-0">
         {userLocation ? (
           <MapContainer 
             center={defaultPosition} 
@@ -260,8 +260,8 @@ export default function MapView() {
 
       </div>
 
-      {/* Bottom Sheet */}
-      {selectedStation && (
+      {/* Bottom Sheet or Empty State Message */}
+      {selectedStation ? (
         <BottomSheet 
           station={selectedStation} 
           isExpanded={bottomSheetExpanded}
@@ -271,6 +271,14 @@ export default function MapView() {
           onStartNavigation={handleStartNavigation}
           onAddReport={handleShowReportForm}
         />
+      ) : (
+        <div className="fixed bottom-[90px] left-0 right-0 mx-4 z-20">
+          <div className="bg-white shadow-lg rounded-xl p-4 text-center">
+            <i className="fas fa-map-pin text-green-600 text-xl mb-2"></i>
+            <h3 className="font-medium text-gray-800">Select a station to see details</h3>
+            <p className="text-sm text-gray-500 mt-1">Tap any marker on the map to view information</p>
+          </div>
+        </div>
       )}
 
       {/* Add Station Modal */}

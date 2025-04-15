@@ -110,20 +110,18 @@ function App() {
           </div>
         )}
         
-        {/* CarPlay Button - Only on Explorer (Map) page, positioned at the top */}
-        {location === "/" && (
-          <div className="sticky top-0 left-0 right-0 z-[900] px-4 pt-2 bg-gradient-to-b from-white via-white to-transparent">
-            <CarPlayButton 
-              onClick={() => {
-                toast({
-                  title: "Car screen integration",
-                  description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
-                  duration: 3000,
-                });
-              }}
-            />
-          </div>
-        )}
+        {/* CarPlay Button - Positioned at the bottom above nav */}
+        <div className="fixed bottom-16 left-0 right-0 z-[900] px-4 pb-2">
+          <CarPlayButton 
+            onClick={() => {
+              toast({
+                title: "Car screen integration",
+                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                duration: 3000,
+              });
+            }}
+          />
+        </div>
       </div>
       
       <BottomNavigation active={activeTab} onTabChange={setActiveTab} />
