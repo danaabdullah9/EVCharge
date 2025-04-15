@@ -23,7 +23,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ active, onTabChange
   };
   
   const navItems = [
-    { id: 'map', name: 'Map', path: '/', icon: 'fa-map-location-dot' },
+    { id: 'map', name: 'Map', path: '/', icon: 'fa-map' },
     { id: 'nearby', name: 'Nearby', path: '/nearby', icon: 'fa-bolt' },
     { id: 'favorites', name: 'Favorites', path: '/favorites', icon: 'fa-heart' },
     { id: 'profile', name: 'Profile', path: '/profile', icon: 'fa-user' },

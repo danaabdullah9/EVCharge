@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import MapView from "@/pages/MapView";
@@ -7,10 +7,14 @@ import Favorites from "@/pages/Favorites";
 import Profile from "@/pages/Profile";
 import Header from "@/components/Header";
 import BottomNavigation from "@/components/BottomNavigation";
+import CarPlayButton from "@/components/CarPlayButton";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 function App() {
   const [activeTab, setActiveTab] = useState("map");
+  const [location] = useLocation();
+  const { toast } = useToast();
 
   return (
     <div className="app-container h-screen flex flex-col">
@@ -23,6 +27,20 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
+      
+      {location === "/" && (
+        <div className="fixed left-0 right-0 bottom-24 px-4 z-40 mx-auto max-w-md">
+          <CarPlayButton 
+            onClick={() => {
+              toast({
+                title: "Car screen integration",
+                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                duration: 3000,
+              });
+            }}
+          />
+        </div>
+      )}
       
       <BottomNavigation active={activeTab} onTabChange={setActiveTab} />
       <Toaster />

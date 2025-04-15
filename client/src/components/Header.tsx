@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -12,7 +13,6 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@shared/schema";
 import Logo from "./Logo";
-import SaudiAvatar from "./SaudiAvatar";
 
 const Header = () => {
   const [location, setLocation] = useLocation();
@@ -120,22 +120,22 @@ const Header = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full ml-1">
-              <SaudiAvatar 
-                username={user?.username} 
-                profileImage={user?.profileImage}
-                size="sm"
-                className="border-2 border-green-600"
-              />
+              <Avatar className="h-8 w-8 border-2 border-green-600">
+                <AvatarImage src={user?.profileImage || ''} />
+                <AvatarFallback className="bg-green-600 text-white">
+                  {user?.username?.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <div className="px-3 py-2 flex items-center">
-              <SaudiAvatar 
-                username={user?.username} 
-                profileImage={user?.profileImage}
-                size="md"
-                className="mr-3"
-              />
+              <Avatar className="h-10 w-10 mr-3">
+                <AvatarImage src={user?.profileImage || ''} />
+                <AvatarFallback className="bg-green-600 text-white">
+                  {user?.username?.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
               <div>
                 <p className="font-medium">{user?.username}</p>
                 <p className="text-xs text-muted-foreground">{user?.email}</p>
