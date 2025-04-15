@@ -35,22 +35,31 @@ function App() {
         
         {/* Filter Button - Only on Explorer (Map) page */}
         {location === "/" && (
-          <div className="fixed left-4 bottom-40 z-[950]">
+          <div className="fixed left-4 bottom-48 z-[950]">
             <Button 
               variant="outline"
-              className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg border border-gray-200 w-12 h-12"
+              className="bg-white hover:bg-gray-50 rounded-full px-4 shadow-lg border border-gray-200 h-10 flex items-center"
               onClick={() => setFiltersVisible(!filtersVisible)}
             >
-              <i className="fas fa-sliders text-gray-800"></i>
+              <i className="fas fa-sliders text-gray-800 mr-1.5"></i>
+              <span className="text-sm font-medium">Filter</span>
             </Button>
           </div>
         )}
         
         {/* Status Filter Sheet - Only on Explorer (Map) page */}
         {location === "/" && filtersVisible && (
-          <div className="fixed left-0 bottom-20 ml-20 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-[950]">
+          <div className="fixed left-0 bottom-40 ml-20 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-[950] w-[260px] max-h-[280px] overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-2">
-              <h3 className="font-semibold text-sm">Filter by Status</h3>
+              <div className="flex justify-between items-center">
+                <h3 className="font-semibold text-xs text-gray-700">Filter by Status</h3>
+                <button 
+                  onClick={() => setFiltersVisible(false)}
+                  className="h-5 w-5 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                >
+                  <i className="fas fa-times text-gray-600 text-xs"></i>
+                </button>
+              </div>
               <div className="flex flex-col gap-2 mt-1">
                 <Button 
                   variant={activeStatusFilter === null ? "default" : "outline"}

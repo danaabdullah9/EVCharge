@@ -111,21 +111,21 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
   if (!isVisible) return null;
 
   return (
-    <div className="absolute left-0 bottom-20 ml-20 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-[800] w-[300px] animate-in slide-in-from-left-5 duration-200">
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="font-semibold text-sm text-green-700">Add New Charging Station</h3>
+    <div className="absolute left-0 bottom-40 ml-20 bg-white p-3 rounded-lg shadow-lg border border-gray-200 z-[800] w-[260px] animate-in slide-in-from-left-5 duration-200 max-h-[320px]">
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="font-semibold text-xs text-green-700">Add New Charging Station</h3>
         <button 
           onClick={onClose}
-          className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          className="h-5 w-5 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
         >
-          <X size={14} className="text-gray-600" />
+          <X size={12} className="text-gray-600" />
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="space-y-2.5 overflow-y-auto max-h-[280px] pr-1 custom-scrollbar">
         <div>
           <Label htmlFor="name" className="text-xs font-medium flex items-center mb-1">
-            <i className="fas fa-charging-station text-green-600 mr-2 text-xs"></i>
+            <i className="fas fa-charging-station text-green-600 mr-1.5 text-xs"></i>
             Station Name
           </Label>
           <Input
@@ -140,7 +140,7 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
         
         <div>
           <Label htmlFor="address" className="text-xs font-medium flex items-center mb-1">
-            <i className="fas fa-map-marker-alt text-green-600 mr-2 text-xs"></i>
+            <i className="fas fa-map-marker-alt text-green-600 mr-1.5 text-xs"></i>
             Address
           </Label>
           <Input
@@ -156,7 +156,7 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
         <div className="grid grid-cols-2 gap-2">
           <div>
             <Label htmlFor="chargerType" className="text-xs font-medium flex items-center mb-1">
-              <i className="fas fa-plug text-green-600 mr-2 text-xs"></i>
+              <i className="fas fa-plug text-green-600 mr-1.5 text-xs"></i>
               Charger Type
             </Label>
             <Select
@@ -179,7 +179,7 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
           
           <div>
             <Label htmlFor="powerOutput" className="text-xs font-medium flex items-center mb-1">
-              <i className="fas fa-bolt text-green-600 mr-2 text-xs"></i>
+              <i className="fas fa-bolt text-green-600 mr-1.5 text-xs"></i>
               Power (kW)
             </Label>
             <Input
@@ -196,7 +196,7 @@ const AddStationPopup = ({ isVisible, onClose, userLocation }: AddStationPopupPr
         
         <div>
           <Label htmlFor="hours" className="text-xs font-medium flex items-center mb-1">
-            <i className="fas fa-clock text-green-600 mr-2 text-xs"></i>
+            <i className="fas fa-clock text-green-600 mr-1.5 text-xs"></i>
             Operating Hours
           </Label>
           <Select
