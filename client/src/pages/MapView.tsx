@@ -11,7 +11,10 @@ import StationMarker from "@/components/StationMarker";
 import BottomSheet from "@/components/BottomSheet";
 import AddStationModal from "@/components/AddStationModal";
 import ReportStationModal from "@/components/ReportStationModal";
+import NavigationHelper from "@/components/NavigationHelper";
+import StatusIndicator from "@/components/StatusIndicator";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { StationWithStats } from "@shared/schema";
 import "leaflet/dist/leaflet.css";
 
@@ -116,9 +119,13 @@ const MapView = () => {
   // State for modals
   const [addStationModalVisible, setAddStationModalVisible] = useState(false);
   const [reportModalVisible, setReportModalVisible] = useState(false);
+  const [navigationModalVisible, setNavigationModalVisible] = useState(false);
   
   // Filter menu
   const [filtersVisible, setFiltersVisible] = useState(false);
+  
+  // Filter stations by status
+  const [activeStatusFilter, setActiveStatusFilter] = useState<string | null>(null);
   
   // Handle station selection
   const handleStationSelect = (station: StationWithStats) => {
@@ -179,16 +186,8 @@ const MapView = () => {
   // Handle navigation
   const handleStartNavigation = () => {
     if (selectedStation) {
-      // Open in maps app
-      const { latitude, longitude, name } = selectedStation;
-      const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&destination_place_id=${name}`;
-      window.open(mapsUrl, '_blank');
-      
-      toast({
-        title: "Navigation started",
-        description: `Directions to ${selectedStation.name} opened in maps.`,
-        duration: 3000,
-      });
+      // Show the navigation helper modal
+      setNavigationModalVisible(true);
     }
   };
   
@@ -302,6 +301,60 @@ const MapView = () => {
           station={selectedStation}
           onClose={() => setReportModalVisible(false)}
         />
+      )}
+      
+      {/* Navigation Helper Modal */}
+      {selectedStation && (
+        <NavigationHelper
+          isOpen={navigationModalVisible}
+          onClose={() => setNavigationModalVisible(false)}
+          stationName={selectedStation.name}
+          latitude={selectedStation.latitude}
+          longitude={selectedStation.longitude}
+        />
+      )}
+      
+      {/* Status Filter Sheet */}
+      {filtersVisible && (
+        <div className="absolute left-0 bottom-20 ml-20 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-20">
+          <div className="flex flex-col gap-2">
+            <h3 className="font-semibold text-sm">Filter by Status</h3>
+            <div className="flex flex-col gap-2 mt-1">
+              <Button 
+                variant={activeStatusFilter === null ? "default" : "outline"}
+                size="sm"
+                className="justify-start"
+                onClick={() => setActiveStatusFilter(null)}
+              >
+                <i className="fas fa-circle text-gray-400 mr-2"></i> All
+              </Button>
+              <Button 
+                variant={activeStatusFilter === 'available' ? "default" : "outline"}
+                size="sm"
+                className="justify-start"
+                onClick={() => setActiveStatusFilter('available')}
+              >
+                <StatusIndicator status="available" availability={100} showText size="sm" />
+              </Button>
+              <Button 
+                variant={activeStatusFilter === 'busy' ? "default" : "outline"}
+                size="sm"
+                className="justify-start"
+                onClick={() => setActiveStatusFilter('busy')}
+              >
+                <StatusIndicator status="busy" availability={50} showText size="sm" />
+              </Button>
+              <Button 
+                variant={activeStatusFilter === 'unavailable' ? "default" : "outline"}
+                size="sm"
+                className="justify-start"
+                onClick={() => setActiveStatusFilter('unavailable')}
+              >
+                <StatusIndicator status="unavailable" availability={0} showText size="sm" />
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
