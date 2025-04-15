@@ -30,7 +30,7 @@ export function useUserLocation() {
     getLocation();
   }, []);
 
-  return { location, error, loading, getLocation };
+  return { location, error, loading, getLocation, refreshLocation: getLocation };
 }
 
 export default useUserLocation;

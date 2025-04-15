@@ -42,6 +42,70 @@ function App() {
           <Route component={NotFound} />
         </Switch>
         
+        {/* Add Station Button */}
+        <div className="fixed left-4 bottom-24 z-[950]">
+          <Button 
+            className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg w-12 h-12"
+            onClick={handleAddStation}
+          >
+            <i className="fas fa-plus text-xl"></i>
+          </Button>
+        </div>
+        
+        {/* Filter Button */}
+        <div className="fixed left-4 bottom-40 z-[950]">
+          <Button 
+            variant="outline"
+            className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg border border-gray-200 w-12 h-12"
+            onClick={() => setFiltersVisible(!filtersVisible)}
+          >
+            <i className="fas fa-sliders text-gray-800"></i>
+          </Button>
+        </div>
+        
+        {/* Status Filter Sheet */}
+        {filtersVisible && (
+          <div className="fixed left-0 bottom-20 ml-20 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-[950]">
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-sm">Filter by Status</h3>
+              <div className="flex flex-col gap-2 mt-1">
+                <Button 
+                  variant={activeStatusFilter === null ? "default" : "outline"}
+                  size="sm"
+                  className="justify-start"
+                  onClick={() => setActiveStatusFilter(null)}
+                >
+                  <i className="fas fa-circle text-gray-400 mr-2"></i> All
+                </Button>
+                <Button 
+                  variant={activeStatusFilter === 'available' ? "default" : "outline"}
+                  size="sm"
+                  className="justify-start"
+                  onClick={() => setActiveStatusFilter('available')}
+                >
+                  <StatusIndicator status="available" availability={100} showText size="sm" />
+                </Button>
+                <Button 
+                  variant={activeStatusFilter === 'busy' ? "default" : "outline"}
+                  size="sm"
+                  className="justify-start"
+                  onClick={() => setActiveStatusFilter('busy')}
+                >
+                  <StatusIndicator status="busy" availability={50} showText size="sm" />
+                </Button>
+                <Button 
+                  variant={activeStatusFilter === 'unavailable' ? "default" : "outline"}
+                  size="sm"
+                  className="justify-start"
+                  onClick={() => setActiveStatusFilter('unavailable')}
+                >
+                  <StatusIndicator status="unavailable" availability={0} showText size="sm" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div className="sticky bottom-20 left-0 right-0 z-50 px-4 mb-4">
           <CarPlayButton 
             onClick={() => {
@@ -58,6 +122,13 @@ function App() {
       
       <BottomNavigation active={activeTab} onTabChange={setActiveTab} />
       <Toaster />
+      
+      {/* Add Station Modal */}
+      <AddStationModal 
+        isVisible={addStationModalVisible}
+        onClose={() => setAddStationModalVisible(false)}
+        userLocation={userLocation}
+      />
     </div>
   );
 }
