@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { StationWithStats } from "@shared/schema";
+import NavigationHelper from './NavigationHelper';
 
 interface BottomSheetProps {
   station: StationWithStats;
@@ -26,6 +27,7 @@ const BottomSheet = ({
 }: BottomSheetProps) => {
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragDelta, setDragDelta] = useState(0);
+  const [isNavigationDialogOpen, setIsNavigationDialogOpen] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   
   // Handle drag behavior
@@ -313,7 +315,7 @@ const BottomSheet = ({
                 <div className="flex justify-between items-start">
                   <div className="flex">
                     <Avatar className="w-8 h-8 mr-3">
-                      <AvatarImage src={report.user.profileImage} />
+                      <AvatarImage src={report.user.profileImage || ''} />
                       <AvatarFallback className="bg-blue-600 text-white text-xs">
                         {report.user.username.charAt(0).toUpperCase()}
                       </AvatarFallback>
@@ -343,7 +345,7 @@ const BottomSheet = ({
         <div className="flex gap-3 mb-4">
           <Button 
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl"
-            onClick={onStartNavigation}
+            onClick={() => setIsNavigationDialogOpen(true)}
           >
             <i className="fas fa-directions mr-1"></i> Navigate
           </Button>
@@ -355,6 +357,15 @@ const BottomSheet = ({
           </Button>
         </div>
       </div>
+      
+      {/* Navigation Helper Dialog */}
+      <NavigationHelper 
+        isOpen={isNavigationDialogOpen}
+        onClose={() => setIsNavigationDialogOpen(false)}
+        stationName={station.name}
+        latitude={station.latitude}
+        longitude={station.longitude}
+      />
     </div>
   );
 };

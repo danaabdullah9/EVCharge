@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,15 +12,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@shared/schema";
+import Logo from "./Logo";
 
 const Header = () => {
   const [location, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
   
   // Fetch user data
   const { data: user } = useQuery<User>({
     queryKey: ['/api/user/profile']
   });
+  
+  // Monitor scroll position for header styles
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // Get page title based on current route
   const getPageTitle = () => {
@@ -49,16 +61,21 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 py-2 px-4 flex justify-between items-center h-14 relative">
+    <header className={`bg-white border-b sticky top-0 z-20 transition-all duration-200 ${
+      isScrolled ? 'shadow-md border-transparent' : 'border-gray-200'
+    } py-2 px-4 flex justify-between items-center h-14 relative`}>
       <div className="flex items-center">
-        <div className="h-8 w-8 bg-green-600 rounded-full flex items-center justify-center text-white mr-2">
-          <i className="fas fa-bolt"></i>
+        <div onClick={() => setLocation("/")} className="cursor-pointer flex items-center">
+          <Logo size="sm" className="mr-2" />
+          <h1 className="text-lg font-semibold text-gray-900 hidden sm:block">{getPageTitle()}</h1>
+          <h1 className="text-lg font-semibold text-gray-900 sm:hidden">
+            {location === "/" ? "EV Spots" : ""}
+          </h1>
         </div>
-        <h1 className="text-lg font-semibold text-gray-900">{getPageTitle()}</h1>
       </div>
       
       <form 
-        className="search-bar relative flex-1 mx-4"
+        className="search-bar relative flex-1 mx-2 sm:mx-4 max-w-md lg:max-w-xl"
         onSubmit={handleSearch}
       >
         <Input
@@ -104,27 +121,46 @@ const Header = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full ml-1">
               <Avatar className="h-8 w-8 border-2 border-green-600">
-                <AvatarImage src={user?.profileImage} />
+                <AvatarImage src={user?.profileImage || ''} />
                 <AvatarFallback className="bg-blue-600 text-white">
                   {user?.username?.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <div className="px-2 py-1.5">
-              <p className="font-medium">{user?.username}</p>
-              <p className="text-xs text-muted-foreground">{user?.email}</p>
+          <DropdownMenuContent align="end" className="w-56">
+            <div className="px-3 py-2 flex items-center">
+              <Avatar className="h-10 w-10 mr-3">
+                <AvatarImage src={user?.profileImage || ''} />
+                <AvatarFallback className="bg-blue-600 text-white">
+                  {user?.username?.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="font-medium">{user?.username}</p>
+                <p className="text-xs text-muted-foreground">{user?.email}</p>
+              </div>
+            </div>
+            <div className="px-3 py-1">
+              <div className="text-xs font-medium text-green-600">
+                {user?.points || 0} points
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                <div 
+                  className="bg-green-600 h-1.5 rounded-full" 
+                  style={{ width: `${Math.min(100, (user?.points || 0) / 2)}%` }}
+                ></div>
+              </div>
             </div>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleProfileAction("profile")}>
+            <DropdownMenuItem onClick={() => handleProfileAction("profile")} className="cursor-pointer">
               <i className="fas fa-user mr-2"></i> Profile
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleProfileAction("settings")}>
+            <DropdownMenuItem onClick={() => handleProfileAction("settings")} className="cursor-pointer">
               <i className="fas fa-cog mr-2"></i> Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleProfileAction("logout")}>
+            <DropdownMenuItem onClick={() => handleProfileAction("logout")} className="cursor-pointer">
               <i className="fas fa-sign-out-alt mr-2"></i> Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
