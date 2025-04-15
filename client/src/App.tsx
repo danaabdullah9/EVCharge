@@ -30,17 +30,15 @@ function App() {
       
       {location === "/" && (
         <div className="fixed left-0 right-0 bottom-[4.5rem] px-4 z-[900] mx-auto max-w-md">
-          <div className="bg-white p-2 rounded-xl shadow-xl">
-            <CarPlayButton 
-              onClick={() => {
-                toast({
-                  title: "Car screen integration",
-                  description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
-                  duration: 3000,
-                });
-              }}
-            />
-          </div>
+          <CarPlayButton 
+            onClick={() => {
+              toast({
+                title: "Car screen integration",
+                description: "Connect your phone to your car to use this app via CarPlay or Android Auto",
+                duration: 3000,
+              });
+            }}
+          />
         </div>
       )}
       
